@@ -1,0 +1,44 @@
+<div [formGroup]="searchForm" class="form">
+  <div class="search-bar-container">
+    <div class="select-user" [matMenuTriggerFor]="menu">
+      <ng-container *ngIf="searchUser === 'all' else userAvatar">
+        All
+      </ng-container>
+      <ng-template #userAvatar>
+        <img [src]="'/assets/' + searchUser + '.jpg'">
+      </ng-template>
+      <mat-icon fontSet="material-icons-round">keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="search-bar-wrapper mat-h4">
+      <mat-icon fontSet="material-icons-round">search</mat-icon>
+      <input autocomplete="off" spellcheck="false" formControlName="search" (keydown.enter)="search()">
+    </div>
+    <button mat-stroked-button (click)="search()">Search</button>
+  </div>
+  <mat-radio-group (change)="search()" formControlName="mode" >
+    <mat-radio-button value="default">Default</mat-radio-button>
+    <mat-radio-button value="popularity">Popularity</mat-radio-button>
+    <mat-radio-button value="words" [disabled]="currentUser.username === 'anonymous'">
+      Personalized by words
+    </mat-radio-button>
+    <mat-radio-button value="hashtags" [disabled]="currentUser.username === 'anonymous'">
+      Personalized by hashtags
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="selectSearchUser('all')">
+    All users
+  </button>
+  <button mat-menu-item *ngFor="let userHit of users; let i = index" (click)="selectSearchUser(userHit._source.username)">
+      <div class="user-wrapper-menu">
+          <img class="user-img" [src]="'/assets/' + userHit._source.username + '.jpg'">
+          <div class="username">
+              @{{userHit._source.username}}
+          </div>
+      </div>
+  </button>
+</mat-menu>
+
+

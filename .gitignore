@@ -1,0 +1,8 @@
+.ipynb_checkpoints
+__pycache__
+venv
+.vscode
+secrets.py
+create_index_conf.py
+/demo/node_modules
+.env

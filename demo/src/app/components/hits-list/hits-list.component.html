@@ -1,0 +1,25 @@
+<div @items *ngFor="let hit of hits">
+
+  <div class="card">
+    <div class="user">
+      <img [src]="'/assets/' + hit._source.username + '.jpg'">
+      <span>@{{hit._source.username}}</span>
+    </div>
+    <div class="tweet-content" [innerHTML]="showMatches ? hit.highlight.content : hit._source.content">
+    </div>
+    <div class="stats">
+      <div class="retweets">
+        <mat-icon>transform</mat-icon>
+        <span>{{hit._source.retweet_count}}</span>
+      </div>
+      <div class="favorites">
+        <mat-icon>favorite_border</mat-icon>
+        <span>{{hit._source.favorite_count}}</span>
+      </div>
+    </div>
+    <div class="relevance mat-caption">
+      Score: {{hit._score}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,22 @@
+app-predefined-searches {
+    display: block;
+    width: 220px;
+    margin-bottom: 10px;
+
+    .card {
+        border: 1px solid #ededed;
+        border-radius: 6px;
+        padding: 10px;
+        cursor: pointer;
+
+        .mat-title {
+            transition: all 150ms ease-out;
+        }
+
+        &:hover {
+            .mat-title {
+                color: #526ED3;
+            }
+        }
+    }
+}

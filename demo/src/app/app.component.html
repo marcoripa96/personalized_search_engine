@@ -1,0 +1,92 @@
+<div class="logo">
+    <img src="/assets/logo.jpg">
+    <div class="mat-title">
+        ElasticProject
+    </div>
+</div>
+
+
+
+<div class="predefined-searches">
+    <app-predefined-searches [preset]="preset" (selected)="selectPreset($event)" *ngFor="let preset of presets">
+    </app-predefined-searches>
+</div>
+
+<div class="top-right-menu">
+    <mat-slide-toggle (change)="showMatches($event)">Show matches</mat-slide-toggle>
+    <div class="user-wrapper" [matMenuTriggerFor]="menu">
+        <ng-container *ngIf="currentUser.username === 'anonymous' else user">
+            <div class="anonymous">
+                <mat-icon fontSet="material-icons-round">person_off</mat-icon>
+            </div>
+        </ng-container>
+        <ng-template #user>
+            <div [ngStyle]="{'background-color': currentColor}" class="avatar">
+                {{currentUser.initials}}
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let userHit of userHits; let i = index" (click)="selectUser(i, userHit._source)">
+        <div class="user-wrapper-menu">
+            <div [ngStyle]="{'background-color': usersDetails[i].color}" class="avatar-menu">
+                {{userHit._source.initials}}
+            </div>
+            <div class="username">
+                @{{userHit._source.username}}
+            </div>
+        </div>
+    </button>
+    <button mat-menu-item (click)="signout()">
+        <mat-icon fontSet="material-icons-round">exit_to_app</mat-icon> Signout
+    </button>
+</mat-menu>
+
+<div class="content">
+    <div *ngIf="currentUser.username !== 'anonymous'" class="user-profile-info">
+        <div class="mat-h1">
+            User profile
+        </div>
+        <div class="top-words">
+            <span class="mat-h3" style="margin-right: 5px; margin-bottom: 0;">Top words:</span>
+            <mat-chip-list>
+                <mat-chip *ngFor="let word of currentUser.top_words">{{word}}</mat-chip>
+            </mat-chip-list>
+        </div>
+
+        <div class="top-entities">
+            <span class="mat-h3" style="margin-right: 5px; margin-bottom: 0;">Top entities:</span>
+            <mat-chip-list>
+                <mat-chip *ngFor="let word of currentUser.top_entities">{{word}}</mat-chip>
+            </mat-chip-list>
+        </div>
+
+        <div class="top-hashtags">
+            <span class="mat-h3" style="margin-right: 5px; margin-bottom: 0;">Top hashtags:</span>
+            <mat-chip-list>
+                <mat-chip *ngFor="let word of currentUser.top_hashtags">#{{word}}</mat-chip>
+            </mat-chip-list>
+        </div>
+
+    </div>
+    <app-search-bar [ngClass]="{'scrolled': scrolled}" [currentPreset]="currentPreset" [currentUser]="currentUser"
+        [users]="userHits" (searchEvent)="searchResults($event)"></app-search-bar>
+    
+    <ng-container *ngIf="(hits && hits.length > 0) else empty">
+        <app-hits-list [hits]="hits" [showMatches]="showMatchesVar"></app-hits-list>
+    </ng-container>
+    <ng-template #empty>
+        <mat-icon fontSet="material-icons-round" class="icon-empty">travel_explore</mat-icon>
+        <div class="mat-display-2">
+            Wow, such empty!
+        </div>
+    </ng-template>
+    
+</div>
+<div class="footer mat-body">
+    Information Retrieval Project - 16/02/2021 - Authors: Christian Bernasconi 816423 & Marco Ripamonti 806785
+</div>

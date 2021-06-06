@@ -1,0 +1,77 @@
+app-hits-list {
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 24px rgba(0,0,0,.12);
+
+        .user {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            color: #6B6D7F;
+            margin-bottom: 5px;
+
+            img {
+                width: 30px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 5px;
+
+            .retweets {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                color: #bebebe;
+                margin-right: 10px;
+                margin-left: auto;
+    
+                mat-icon {
+                    font-size: 20px;
+                    width: 20px;
+                    height: 20px;
+                    color: #9BBFDF;
+                    margin-right: 5px;
+                }
+            }
+    
+            .favorites {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                color: #bebebe;
+    
+                mat-icon {
+                    font-size: 20px;
+                    width: 20px;
+                    height: 20px;
+                    color:#D0878C;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .relevance {
+            position: absolute;
+            left: 105%;
+            top: calc(50% - 20px);
+            color: #82C968;
+        }
+
+        .highlight {
+            background: #b2e7a2;
+        }
+        
+
+    }
+}
