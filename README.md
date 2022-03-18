@@ -3,6 +3,11 @@ Implementation of a personalized search engine using Elastic Search on tweets.
 
 A demo using Angular has also been built.
 
+# Group
+
+- Christian Bernasconi 816423
+- Marco Ripamonti 806785
+
 ## Description
 Tweets from five different 5 people of two different domains have been gathered using `Tweepy`.
 Those users are then used to build five custom user profiles so that searches between users are different from one another.
